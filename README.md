@@ -99,7 +99,7 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "MACHINE_LABEL" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.1"
+    source = "github.com/antarctica/terraform-module-digital-ocean-records?ref=v1.0.2"
     hostname = "MACHINE_LABEL"
     machine_interface_ipv4_public = "${module.MACHINE_LABEL.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.MACHINE_LABEL.ip_v4_address_private}"
@@ -118,7 +118,7 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "lioncub-dev-node1" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.1"
+    source = "github.com/antarctica/terraform-module-digital-ocean-records?ref=v1.0.2"
     hostname = "lioncub-dev-node1"
     machine_interface_ipv4_public = "${module.lioncub-dev-node1.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.lioncub-dev-node1.ip_v4_address_private}"

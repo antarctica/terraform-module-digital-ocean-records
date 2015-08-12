@@ -1,5 +1,11 @@
 # Terraform Module - DigitalOcean Records - Changelog
 
+## 1.0.2 - August 2015
+
+### Fixed
+
+* Incorrect source links in example
+
 ## 1.0.1 - August 2015
 
 ### Fixed

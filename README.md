@@ -1,10 +1,10 @@
-# Terraform Module - Digital Ocean Records
+# Terraform Module - DigitalOcean Records
 
-Specifies an opinionated set of Digital Ocean DNS Record resources for a Digital Ocean 'Droplet'.
+Specifies an opinionated set of DigitalOcean DNS Record resources for a DigitalOcean 'Droplet'.
 
 ## Overview
 
-The public and private network interfaces for a Digital Ocean VM will be created as "namespaced" `A` records. A `CNAME` record will be created to act as a default interface which points to the `A` record for public interface.
+The public and private network interfaces for a DigitalOcean VM will be created as "namespaced" `A` records. A `CNAME` record will be created to act as a default interface which points to the `A` record for public interface.
 
 For example, a VM with a host name: `menagerie-prod-node1` this module would create 3 DNS records:
 
@@ -22,7 +22,7 @@ This module is designed for internal use but if useful can be shared publicly.
 
 ### Requirements
 
-Somewhere in your project you must have specified an access token for the digital ocean provider like this:
+Somewhere in your project you must have specified an access token for the DigitalOcean provider like this:
 
 ```
 # Digital Ocean provider configuration
@@ -37,9 +37,9 @@ Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_to
 ### Variables
 
 * `domain`
-    * The domain within Digital Ocean this module will create DNS records in.
-    * See [Digital Ocean's API documentation](https://developers.digitalocean.com/#domains) for details.
-    * This value **MUST** be a domain in your Digital Ocean account as a string.
+    * The domain within DigitalOcean this module will create DNS records in.
+    * See [DigitalOcean's API documentation](https://developers.digitalocean.com/#domains) for details.
+    * This value **MUST** be a domain in your DigitalOcean account as a string.
     * Default: "web.nerc-bas.ac.uk"
 * `sub_domains`
     * Any additional sub-domains (or other string) to be added before the domain variable.
@@ -94,7 +94,7 @@ module "MACHINE_LABEL" {
 }
 ```
 
-Where: `MACHINE_LABEL` is the name of the droplet (i.e. its hostname) and `${module.MACHINE_LABEL}` is a [Digital Ocean droplet resource](https://www.terraform.io/docs/providers/do/r/droplet.html).
+Where: `MACHINE_LABEL` is the name of the droplet (i.e. its hostname) and `${module.MACHINE_LABEL}` is a [DigitalOcean droplet resource](https://www.terraform.io/docs/providers/do/r/droplet.html).
 
 E.g.
 

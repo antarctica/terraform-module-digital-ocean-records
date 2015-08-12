@@ -1,10 +1,10 @@
-# Terraform Module - Digital Ocean Records
+# Terraform Module - DigitalOcean Records
 
-Specifies an opinionated set of Digital Ocean DNS Record resources for a Digital Ocean 'Droplet'.
+Specifies an opinionated set of DigitalOcean DNS Record resources for a DigitalOcean 'Droplet'.
 
 ## Overview
 
-The public and private network interfaces for a Digital Ocean VM will be created as "namespaced" `A` records. A `CNAME` record will be created to act as a default interface which points to the `A` record for public interface.
+The public and private network interfaces for a DigitalOcean VM will be created as "namespaced" `A` records. A `CNAME` record will be created to act as a default interface which points to the `A` record for public interface.
 
 For example, a VM with a host name: `menagerie-prod-node1` this module would create 3 DNS records:
 
@@ -22,24 +22,36 @@ This module is designed for internal use but if useful can be shared publicly.
 
 ### Requirements
 
-Somewhere in your project you must have specified an access token for the digital ocean provider like this:
+#### Minimum version
+
+This module uses the string interpolation method introduced in Terraform 6.0. 
+Older versions will not work with this module, use either upgrade to at least version 6.0, or use version 0.1.0 of this module. 
+
+#### DigitalOcean access token
+
+Somewhere in your project you must have specified an access token for the DigitalOcean provider like this:
 
 ```
-# Digital Ocean provider configuration
+# Define variables
+
+variable "digital_ocean_token" {}  # Define using environment variable - e.g. TF_VAR_digital_ocean_token=XXX
+
+
+# DigitalOcean provider configuration
 
 provider "digitalocean" {
     token = "TOKEN"
 }
 ```
 
-Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_token}"`.
+Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_token}"`, with its value set using an environment variable, e.g. `TF_VAR_digital_ocean_token=XXX`.
 
 ### Variables
 
 * `domain`
-    * The domain within Digital Ocean this module will create DNS records in.
-    * See [Digital Ocean's API documentation](https://developers.digitalocean.com/#domains) for details.
-    * This value **MUST** be a domain in your Digital Ocean account as a string.
+    * The domain within DigitalOcean this module will create DNS records in.
+    * See [DigitalOcean's API documentation](https://developers.digitalocean.com/#domains) for details.
+    * This value **MUST** be a domain in your DigitalOcean account as a string.
     * Default: "web.nerc-bas.ac.uk"
 * `sub_domains`
     * Any additional sub-domains (or other string) to be added before the domain variable.
@@ -87,14 +99,14 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "MACHINE_LABEL" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record"
+    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.0"
     hostname = "MACHINE_LABEL"
     machine_interface_ipv4_public = "${module.MACHINE_LABEL.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.MACHINE_LABEL.ip_v4_address_private}"
 }
 ```
 
-Where: `MACHINE_LABEL` is the name of the droplet (i.e. its hostname) and `${module.MACHINE_LABEL}` is a [Digital Ocean droplet resource](https://www.terraform.io/docs/providers/do/r/droplet.html).
+Where: `MACHINE_LABEL` is the name of the droplet (i.e. its hostname) and `${module.MACHINE_LABEL}` is a [DigitalOcean droplet resource](https://www.terraform.io/docs/providers/do/r/droplet.html).
 
 E.g.
 
@@ -106,7 +118,7 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "lioncub-dev-node1" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v0.1.0"
+    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.0"
     hostname = "lioncub-dev-node1"
     machine_interface_ipv4_public = "${module.lioncub-dev-node1.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.lioncub-dev-node1.ip_v4_address_private}"
@@ -116,11 +128,6 @@ module "lioncub-dev-node1" {
 ### Outputs
 
 None.
-
-## Limitations
-
-* [Terraform #57](https://github.com/hashicorp/terraform/issues/57) - It isn't currently possible to set Terraform from Environment variables, and therefore a `terraform.tfvars`
-file is needed as a stand-in. This is annoying and is a limitation of the software.
 
 ## Contributions
 

@@ -30,13 +30,13 @@ variable "machine_interface_ipv4_private" {
 resource "digitalocean_record" "public_interface_record" {
     domain = "${var.domain}"
     type = "A"
-    name = "${concat(var.hostname,".",var.public_interface_label,var.sub_domains)}"
+    name = "${var.hostname}.${var.public_interface_label}${var.sub_domains}"
     value = "${var.machine_interface_ipv4_public}"
 }
 resource "digitalocean_record" "private_interface_record" {
     domain = "${var.domain}"
     type = "A"
-    name = "${concat(var.hostname,".",var.private_interface_label,var.sub_domains)}"
+    name = "${var.hostname}.${var.private_interface_label}${var.sub_domains}"
     value = "${var.machine_interface_ipv4_private}"
 }
 resource "digitalocean_record" "default_interface_record" {

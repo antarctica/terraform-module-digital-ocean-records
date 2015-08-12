@@ -1,5 +1,12 @@
 # Terraform Module - DigitalOcean Records - Changelog
 
+## 1.0.1 - August 2015
+
+### Fixed
+
+* Incorrect example given for setting DigitalOcean provider. Used static value instead of variable
+    * Note: This is purely a documentation problem, nothing has changed within this module
+
 ## 1.0.0 - August 2015
 
 ### Breaking changes

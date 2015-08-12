@@ -31,7 +31,7 @@ Older versions will not work with this module, use either upgrade to at least ve
 
 Somewhere in your project you must have specified an access token for the DigitalOcean provider like this:
 
-```
+```ruby
 # Define variables
 
 variable "digital_ocean_token" {}  # Define using environment variable - e.g. TF_VAR_digital_ocean_token=XXX

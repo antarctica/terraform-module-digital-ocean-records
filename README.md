@@ -22,17 +22,29 @@ This module is designed for internal use but if useful can be shared publicly.
 
 ### Requirements
 
+#### Minimum version
+
+This module uses the string interpolation method introduced in Terraform 6.0. 
+Older versions will not work with this module, use either upgrade to at least version 6.0, or use version 0.1.0 of this module. 
+
+#### DigitalOcean access token
+
 Somewhere in your project you must have specified an access token for the DigitalOcean provider like this:
 
 ```
-# Digital Ocean provider configuration
+# Define variables
+
+variable "digital_ocean_token" {}  # Define using environment variable - e.g. TF_VAR_digital_ocean_token=XXX
+
+
+# DigitalOcean provider configuration
 
 provider "digitalocean" {
     token = "TOKEN"
 }
 ```
 
-Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_token}"`.
+Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_token}"`, with its value set using an environment variable, e.g. `TF_VAR_digital_ocean_token=XXX`.
 
 ### Variables
 
@@ -87,7 +99,7 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "MACHINE_LABEL" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record"
+    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.0"
     hostname = "MACHINE_LABEL"
     machine_interface_ipv4_public = "${module.MACHINE_LABEL.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.MACHINE_LABEL.ip_v4_address_private}"
@@ -106,7 +118,7 @@ E.g.
 # DNS records (public, private and default [which is an APEX record and points to public])
 
 module "lioncub-dev-node1" {
-    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v0.1.0"
+    source = "github.com/antarctica/terraform-module-digital-ocean-record?ref=v1.0.0"
     hostname = "lioncub-dev-node1"
     machine_interface_ipv4_public = "${module.lioncub-dev-node1.ip_v4_address_public}"
     machine_interface_ipv4_private = "${module.lioncub-dev-node1.ip_v4_address_private}"
@@ -116,11 +128,6 @@ module "lioncub-dev-node1" {
 ### Outputs
 
 None.
-
-## Limitations
-
-* [Terraform #57](https://github.com/hashicorp/terraform/issues/57) - It isn't currently possible to set Terraform from Environment variables, and therefore a `terraform.tfvars`
-file is needed as a stand-in. This is annoying and is a limitation of the software.
 
 ## Contributions
 

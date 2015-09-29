@@ -1,5 +1,16 @@
 # Terraform Module - DigitalOcean Records - Changelog
 
+## Unreleased
+
+### Changed
+
+* Updating module with respect to WSR-1, which sets new defaults for DNS domain and interface labels
+
+### Removed
+
+* [BREAKING!] As all services should now sit behind a load balancer, the default interface DNS record will no longer be 
+created
+
 ## 1.0.2 - August 2015
 
 ### Fixed

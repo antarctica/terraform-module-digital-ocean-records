@@ -4,15 +4,14 @@ Specifies an opinionated set of DigitalOcean DNS Record resources for a DigitalO
 
 ## Overview
 
-The public and private network interfaces for a DigitalOcean VM will be created as "namespaced" `A` records. A `CNAME` record will be created to act as a default interface which points to the `A` record for public interface.
+The public and private network interfaces for a DigitalOcean VM will be created as "namespaced" `A` records.
 
-For example, a VM with a host name: `menagerie-prod-node1` this module would create 3 DNS records:
+For example, a VM with a host name: `menagerie-prod-node1` this module would create 2 DNS records:
 
-| Type    | Name                          | Value                                            | FQDN                                             | Notes                             |
-| ------- | ----------------------------- | ------------------------------------------------ | ------------------------------------------------ | --------------------------------- |
-| `A`     | menagerie-prod-node1.internal | 10.131.190.89                                    | menagerie-prod-node1.internal.web.nerc-bas.ac.uk | The VM's private IP address       |
-| `A`     | menagerie-prod-node1.external | 178.62.124.75                                    | menagerie-prod-node1.external.web.nerc-bas.ac.uk | The VM's public IP address        |
-| `CNAME` | menagerie-prod-node1          | menagerie-prod-node1.external.web.nerc-bas.ac.uk | menagerie-prod-node1.web.nerc-bas.ac.uk          | A pointer for the default address |
+| Type      | Name                       | Value           | FQDN                                             | Notes                       |
+| --------- | -------------------------- | --------------- | ------------------------------------------------ | --------------------------- |
+| **A**     | `menagerie-prod-node1.int` | `10.131.190.89` | `menagerie-prod-node1.int.do.net.nerc-bas.ac.uk` | The VM's private IP address |
+| **A**     | `menagerie-prod-node1.ext` | `178.62.124.75` | `menagerie-prod-node1.ext.do.net.nerc-bas.ac.uk` | The VM's public IP address  |
 
 ## Availability
 
@@ -52,7 +51,8 @@ Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_to
     * The domain within DigitalOcean this module will create DNS records in.
     * See [DigitalOcean's API documentation](https://developers.digitalocean.com/#domains) for details.
     * This value **MUST** be a domain in your DigitalOcean account as a string.
-    * Default: "web.nerc-bas.ac.uk"
+    * This variable is defined by WSR-1 and therefore **SHOULD NOT** be changed without good reason
+    * Default: "do.net.nerc-bas.ac.uk"
 * `sub_domains`
     * Any additional sub-domains (or other string) to be added before the domain variable.
     * This variable **MUST** include any special characters (such as `.` or `-`) which should proceed or succeed this value.
@@ -62,14 +62,14 @@ Where `TOKEN` is usually defined using a variable, e.g. `"${var.digital_ocean_to
     * Default: "" (empty)
 * `public_interface_label`
     * The term used for describing the public interface for a machine within DNS.
-    * This variable **SHOULD** be consistent ideally following a convention.
     * This variable **MUST** be a valid DNS record name or value as a string.
     * Default: "external"
+    * This variable is defined by WSR-1 and therefore **SHOULD NOT** be changed without good reason
 * `private_interface_label`
     * The term used for describing the private interface for a machine within DNS.
-    * This variable **SHOULD** be consistent ideally following a convention.
     * This variable **MUST** be a valid DNS record name or value as a string.
     * Default: "internal"
+    * This variable is defined by WSR-1 and therefore **SHOULD NOT** be changed without good reason
 * `hostname`
     * Identifier for a machine within DNS, usually its hostname.
     * This variable **SHOULD** be consistent ideally following a convention.

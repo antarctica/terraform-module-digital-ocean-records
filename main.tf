@@ -1,7 +1,7 @@
 # Module variables
 
 variable "domain" {
-    default = "web.nerc-bas.ac.uk"
+    default = "do.net.nerc-bas.ac.uk"
     descrtiption = "The domain within Digital Ocean DNS records should be created within"
 }
 variable "sub_domains" {
@@ -9,11 +9,11 @@ variable "sub_domains" {
     description = "Any additional sub-domains to be added before the domain variable"
 }
 variable "public_interface_label" {
-    default = "external"
+    default = "ext"
     description = "The term used for describing the public interface for a machine within DNS"
 }
 variable "private_interface_label" {
-    default = "internal"
+    default = "int"
     description = "The term used for describing the private interface for a machine within DNS"
 }
 variable "hostname" {

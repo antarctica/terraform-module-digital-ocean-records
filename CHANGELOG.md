@@ -1,10 +1,11 @@
 # Terraform Module - DigitalOcean Records - Changelog
 
-## Unreleased
+## 2.0.0 - September 2015
 
 ### Changed
 
 * Updating module with respect to WSR-1, which sets new defaults for DNS domain and interface labels
+* BAS URL listed in license file updated to new BAS canonical URL
 
 ### Removed
 

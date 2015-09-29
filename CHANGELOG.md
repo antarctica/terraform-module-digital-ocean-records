@@ -1,6 +1,6 @@
 # Terraform Module - DigitalOcean Records - Changelog
 
-## Unreleased
+## 2.0.0 - September 2015
 
 ### Changed
 
